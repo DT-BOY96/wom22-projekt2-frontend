@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link rel="stylesheet" href="style.css">
+    <title>Notes-UI</title>
+  </head>
+  <body>
+    <h1>Notes UI</h1>
+
+    <div id="login">
+        <input id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <input id="btn-login" type="button" value="login">
+        <div id="msg" style="color:red;"></div>
+    </div>
+
+    <div id="edit">
+      <input type="hidden" id="0">
+      <textarea id="noteText" placeholder="Write note here...."></textarea>
+      <input id="btn-save" type="button" value="Save">
+    </div>
+    <div id="notes">No notes</div>
+
+    
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+  </body>
+</html>
