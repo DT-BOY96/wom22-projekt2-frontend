@@ -3,14 +3,14 @@
     display: none;
 }
 
-.note {
+.cabin {
     margin: 5px;
     border: 1px solid gray;
     border-radius: 5px;
-    background-color: lemonchiffon;
+    background-color: rgb(86, 238, 83);
     padding: 8px;
     max-width: 150px;
-    float: left;
+    display: block;
 }
 
 body {

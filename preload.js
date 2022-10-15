@@ -5,17 +5,16 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('electron', {
-  
-  getNotes: () => ipcRenderer.invoke('get-notes'),
 
-  notesLogin: (data) => ipcRenderer.invoke('notes-login', data),
-  
+  getCabins: () => ipcRenderer.invoke('get-cabins'),
+
+  login: (data) => ipcRenderer.invoke('login', data),
+
   saveNote: (data) => ipcRenderer.invoke('save-note', data),
 
-  delNote: (data) => ipcRenderer.invoke('del-note', data)
+  delNote: (data) => ipcRenderer.invoke('del-note', data),
 
-
-
+  getServices: (data) => ipcRenderer.invoke('get-services', data)
 
   /*
     btnClick: () => {

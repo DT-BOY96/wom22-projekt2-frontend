@@ -9,6 +9,7 @@ require('dotenv').config()
 const Store = require('electron-store')
 const store = new Store()
 
+
 // Move this to .env (or similar...)
 const API_URL = process.env.API_URL_ENV
 const API_URL2 = process.env.API_URL_ENV_2
@@ -39,32 +40,11 @@ app.whenReady().then(() => {
   // Check original template for MacOS stuff!
 })
 
-ipcMain.handle('get-notes', async () => {
-  console.log('get-notes (main)')
+ipcMain.handle('login', async (event, data) => {
+  console.log('login (main)')
+  console.log(API_URL + '/users/login')
   try {
-    const resp = await fetch(API_URL2 + '/cabins', {
-      headers: { 'Authorization': 'Bearer ' + store.get('jwt') },
-      timeout: 2000
-    })
-    const notes = await resp.json()
-
-    if (resp.status > 201) {
-      console.log("TEST" +notes)
-      return false
-    }
-    return notes
-
-  } catch (error) {
-    console.log(error.message)
-    return false
-  }
-
-})
-
-ipcMain.handle('notes-login', async (event, data) => {
-  console.log('notes-login (main)')
-  try {
-    const resp = await fetch(API_URL2 + '/cabins/login', {
+    const resp = await fetch(API_URL + '/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -84,6 +64,51 @@ ipcMain.handle('notes-login', async (event, data) => {
   }
 
 })
+
+ipcMain.handle('get-cabins', async () => {
+  console.log('get-cabins (main)')
+  try {
+    const resp = await fetch(API_URL2 + '/cabins', {
+      headers: { 'Authorization': 'Bearer ' + store.get('jwt') },
+      timeout: 2000
+    })
+    const cabins = await resp.json()
+
+    if (resp.status > 201) {
+      return false
+    }
+    console.log("TEST" + cabins)
+    return cabins
+
+  } catch (error) {
+    console.log(error.message)
+    return false
+  }
+
+})
+
+ipcMain.handle('get-services', async () => {
+  console.log('get-services (main)')
+  try {
+    const resp = await fetch(API_URL2 + '/services', {
+      method: 'GET',
+      timeout: 4000
+    })
+    const services = await resp.json()
+
+    if (resp.status > 201) {
+      return false
+    }
+    console.log(services)
+    return services
+
+  } catch (error) {
+    console.log(error.message)
+    return false
+  }
+})
+
+
 
 ipcMain.handle('saved-note', async (event, data) => {
   console.log('saved-note (main)')
@@ -106,13 +131,14 @@ ipcMain.handle('saved-note', async (event, data) => {
     return { 'msg': "Note save failed." }
   }
 
-  ipcMain.handle('del-note', async (event, data) => {
-    console.log("ID:" + event.target)
-    if (event.classList.contains('btn-del')) {
-      //console.log(event.target.getAttribute)
 
-    }
-  })
+})
+ipcMain.handle('del-note', async (event, data) => {
+  console.log("ID:" + event.target)
+  if (event.classList.contains('btn-del')) {
+    //console.log(event.target.getAttribute)
+
+  }
 })
 
 /*

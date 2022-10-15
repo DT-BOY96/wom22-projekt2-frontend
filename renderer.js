@@ -6,64 +6,76 @@
  * to expose Node.js functionality from the main process.
  */
 
- getNotes = async () => {
-    console.log('getNotes')
-    const notes = await window.electron.getNotes()
-    console.log(notes)
+getCabins = async () => {
+    console.log('getCabins')
+    const cabins = await window.electron.getCabins()
 
-    if (!notes) {
+    if (!cabins) {
         document.querySelector('#login').style.display = 'block'
         return
     }
 
-    let notesHTML = "";
-    for (const note of notes) {
-        notesHTML += `
-            <div class="note">
-                ${note.text}
-                <input class="btn-del" data-id="${note._id}" type="button" value="del">
-            </div>
+    let cabinsHTML = "";
+    let i = 0;
+    for (const cabin of cabins) {
+
+        cabinsHTML += `
+           
+            <div class="cabin" data-id="${cabin._id}">
+                ${cabin.address}
+                <input class="btn-del" data-id="${cabin._id}" type="button" value="del" >
+                
+            </div>     
         `;
+        i += 1;
     }
 
-    document.querySelector('#notes').innerHTML = notesHTML;
+    document.querySelector('#cabins').innerHTML = cabinsHTML;
 
 }
-getNotes()
+getCabins()
 
+getServices = async () => {
+    console.log('getServices')
+    const services = await window.electron.getServices()
+    console.log(services)
+    
+}
+//getServices()
 
 document.querySelector('#btn-login').addEventListener('click', async () => {
     document.querySelector('#msg').innerText = ''
-    const login_failed = await window.electron.notesLogin({
+    const login_failed = await window.electron.login({
         email: document.querySelector('#email').value,
         password: document.querySelector('#password').value
     })
     if (login_failed) {
         document.querySelector('#msg').innerText = login_failed.msg
-        return 
+        return
     }
 
     document.querySelector('#login').style.display = 'none'
-    getNotes()
+    getCabins()
 })
 
 document.querySelector('#btn-save').addEventListener('click', async () => {
-    
+
     const noteId = 0
     const noteText = document.querySelector('#note-text').value
     const noteSaved = await window.electron.saveNote({
-        id: noteId, 
+        id: noteId,
         text: noteText
     })
     console.log(noteSaved)
-    getNotes()
+    getCabins()
 
 })
 
-document.querySelector('#notes').addEventListener('click', async (event) => {
-    console.log(event.target)
+document.querySelector('#cabins').addEventListener('click', async (event) => {
+    console.log(event.target.innerText)
+    console.log("ID:" + event.target.getAttribute('data-id'))
     if (event.target.classList.contains('btn-del')) {
-        console.log("ID:"+event.target.getAttribute('data-id'))
+        console.log("ID:" + event.target.getAttribute('data-id'))
         await window.electron.delNote(event.target.getAttribute('data-id'))
 
     }
