@@ -18,10 +18,10 @@ document.querySelector('#btn-login').addEventListener('click', async () => {
 getCabins = async () => {
     console.log('getCabins')
     const cabins = await window.electron.getCabins()
-    if (!cabins) {
+    if (!cabins || cabins.msg == 'request-timeout') {
         document.querySelector('#login').style.display = 'block'
         document.querySelector('#bigBox').style.display = 'none'
-        document.querySelector('#msg').innerText = cabins.msg
+        document.querySelector('#msg').innerText ='request-timeout'
 
         return
     } else if (cabins) {

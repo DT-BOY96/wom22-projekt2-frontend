@@ -76,10 +76,7 @@ ipcMain.handle('get-cabins', async () => {
     return cabins
 
   } catch (error) {
-    if(error.type ="request-timeout") {
-      return {'msg': error.type}
-    }
-    console.log(error.message)
+    console.log(error.type)
     return false
   }
 
