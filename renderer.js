@@ -96,12 +96,12 @@ document.querySelector('#orderbutton').addEventListener('click', async (event) =
 document.querySelector('#openeditor').addEventListener('click', async () => {
     console.log("editing")
     document.getElementById('editor').style.display = 'inline'
-    document.getElementById('edit&order').style.display = 'none'
+    document.getElementById('edit-and-delete').style.display = 'none'
 })
 
 document.querySelector('#cancel').addEventListener('click', async () => {
     document.getElementById('editor').style.display = 'none'
-    document.getElementById('edit&order').style.display = 'inline'
+    document.getElementById('edit-and-delete').style.display = 'inline'
 })
 
 document.querySelector('#makeedit').addEventListener('click', async () => {

@@ -4,7 +4,7 @@
 }
 
 .left-h3 {
-    margin: 35px;
+    text-align: center;
 }
 
 h1 {
@@ -96,4 +96,7 @@ label {
 }
 #msg {
     margin: auto;
+}
+.e-and-d {
+    margin-left: 35px;
 }
