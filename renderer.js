@@ -1,10 +1,3 @@
-/**
- * This file is loaded via the <script> tag in the index.html file and will
- * be executed in the renderer process for that window. No Node.js APIs are
- * available in this process because `nodeIntegration` is turned off and
- * `contextIsolation` is turned on. Use the contextBridge API in `preload.js`
- * to expose Node.js functionality from the main process.
- */
 getCabins = async () => {
     console.log('getCabins')
     const cabins = await window.electron.getCabins()
@@ -20,31 +13,32 @@ getCabins = async () => {
 
     for (const cabin of cabins) {
         cabinsHTML += `
-            <option class="cabin" data-id="${cabin._id}">
+            <option class="cabins" data-id="${cabin.id}">
                 ${cabin.address}   
             </option>     
         `;
     }
     document.querySelector('#cabins').innerHTML = cabinsHTML;
+    document.querySelector('#cabins2').innerHTML = cabinsHTML;
+    document.querySelector('#cabin-edit').innerHTML = cabinsHTML;
 }
-//getCabins()
 
 getServices = async () => {
     console.log('getServices')
     const services = await window.electron.getServices()
 
     let servicesHTML = "";
-    for (const service of services) {
+    for (const serve of services) {
         servicesHTML += `  
-        <option class="service" data-id="${service._id}">
-            ${service.servicetype}
+        <option class="services" data-id="${serve.id}">
+            ${serve.servicetype}
         </option>
         `;
     }
     document.querySelector('#services').innerHTML = servicesHTML;
+    document.querySelector('#services2').innerHTML = servicesHTML;
     document.querySelector('#service-edit').innerHTML = servicesHTML;
 }
-//getServices()
 
 getOrders = async (event) => {
     console.log('getOrders')
@@ -53,14 +47,14 @@ getOrders = async (event) => {
         document.querySelector('#orders').innerHTML = "No orders found";
         return
     }
-    let ordersHTML = `<h3 class="left-h3">Your Orders</h3>`;
+    let ordersHTML = "";
     for (const order of orders) {
         var newdate = new Date(order.date).toLocaleDateString('sv')
         ordersHTML += `  
         
         <option class="orders" value="${order.id}">
-            ${order.cabin}
-            ${order.servicetype}
+            ${order.cabin} ||
+            ${order.servicetype} ||
             ${newdate}
         </option>
         `;
@@ -78,13 +72,11 @@ document.querySelector('#orderbutton').addEventListener('click', async (event) =
         servicetype: service,
         date: date
     })
-    console.log(makeOrder)
     getOrders()
 })
 
 document.querySelector('#openeditor').addEventListener('click', async () => {
     console.log("editing")
-    const id = document.getElementById('orders').value
     document.getElementById('editor').style.display = 'inline'
     document.getElementById('edit&order').style.display = 'none'
 
@@ -107,12 +99,6 @@ document.querySelector('#makeedit').addEventListener('click', async () => {
         servicetype: service,
         date: date
     })
-    console.log(id)
-
-    console.log(cabin)
-    console.log(service)
-    console.log(date)
-
 })
 
 document.querySelector('#deletebutton').addEventListener('click', async () => {
@@ -120,7 +106,6 @@ document.querySelector('#deletebutton').addEventListener('click', async () => {
     const deleteOrder = await window.electron.deleteOrder({
         id: id
     })
-    console.log(deleteOrder)
     getOrders()
 })
 

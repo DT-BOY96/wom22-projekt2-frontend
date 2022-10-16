@@ -4,18 +4,14 @@ const path = require('path')
 const fetch = require('electron-fetch').default
 require('dotenv').config()
 
-// "localStorage" for electron
-// https://www.npmjs.com/package/electron-store
 const Store = require('electron-store')
 const store = new Store()
 
 
-// Move this to .env (or similar...)
 const API_URL = process.env.API_URL_ENV
 const API_URL2 = process.env.API_URL_ENV_2
 
 function createWindow() {
-  // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -80,7 +76,7 @@ ipcMain.handle('get-cabins', async () => {
     return cabins
 
   } catch (error) {
-    //console.log(error.message)
+    console.log(error.type)
     return false
   }
 

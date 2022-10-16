@@ -11,6 +11,7 @@
 
 <body>
   <h1>Cabin-service</h1>
+  <div id="msg" style="color:red;"></div>
 
   <div id="login">
     <h3 class="left-h3">Login</h3>
@@ -24,50 +25,58 @@
 
     <div id="leftBox">
       <h3 class="left-h3">Your Cabins</h3>
-      <label for="cabins">Cabins</label><br>
-      <select id="cabins">No cabins</select>
-
-      <br>
+      <div id="cabins2"></div>
       <h3 class="left-h3">Available Services</h3>
-      <label for="services">Services</label><br>
-      <select id="services">No services</select>
-      <br>
+      <div id="services2"></div>
 
-      <label for="calender">Service date</label><br>
-      <input type="date" id="calender" min="2022-10-17" value="2022-11-11">
-      <br>
-      <br>
-      <button id="orderbutton">Make Order</button>
+      <h3 class="left-h3">Order service for cabin</h3>
+      <div class="maker">
+        <label for="cabins">Cabins</label><br>
+        <select id="cabins">No cabins</select>
+        <br>
 
+        <label for="services">Services</label><br>
+        <select id="services">No services</select>
+        <br>
+
+        <label for="calender">Service date</label><br>
+        <input type="date" id="calender" min="2022-10-17" value="2022-11-11">
+        <br>
+        <br>
+        <button id="orderbutton">Make Order</button>
+      </div>
     </div>
 
     <div id="rightBox">
+      <h3 class="left-h3">Your Orders</h3>
       <div id="orders2"></div>
       <br>
-      <select id="orders">No orders</select>
-      <br>
-      <div id="edit&order">
-        <button id="openeditor">EDIT</button>
-        <button id="deletebutton">DELETE</button>
-      </div>
-      <br>
-      <div id="editor">
-        <form>
-          <label for="cabin-edit">Cabin</label><br>
-          <input type="text" id="cabin-edit" placeholder="Cabin address" required>
-          <br>
-          <label for="service-edit">Services</label><br>
-          <select id="service-edit" required></select>
+      <div class="maker">
+        <label for="orders">Selected order:</label><br>
+        <select id="orders">No orders</select>
+        <br>
+        <br>
+        <div id="edit&order">
+          <button id="openeditor">EDIT</button>
+          <button id="deletebutton">DELETE</button>
+        </div>
+        <div id="editor">
+          <form>
+            <label for="cabin-edit">Cabin</label><br>
+            <select id="cabin-edit" required></select>
+            <br>
+            <label for="service-edit">Services</label><br>
+            <select id="service-edit" required></select>
             <br>
             <label for="date-edit">Date</label><br>
             <input type="date" id="date-edit" value="2022-11-11" required><br>
-            <input id="cancel" type="button" value="Cancel" >
+            <input id="cancel" type="button" value="Cancel">
             <input id="makeedit" type="submit" value="Make edit">
 
-        </form>
+          </form>
 
+        </div>
       </div>
-
     </div>
 
   </div>

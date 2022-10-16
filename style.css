@@ -9,7 +9,7 @@
 h1 {
     text-align: center;
 }
-.cabin {
+.cabins {
     margin: 15px;
     border: 1px solid gray;
     border-radius: 5px;
@@ -17,9 +17,10 @@ h1 {
     padding: 8px;
     max-width: 300px;
     display: block;
+    color: red;
 }
 
-.service {
+.services {
     margin: 15px;
     border: 1px solid gray;
     border-radius: 5px;
@@ -27,6 +28,7 @@ h1 {
     padding: 8px;
     max-width: 300px;
     display: block;
+    color: blue;
 }
 .orders {
     margin: 15px;
@@ -36,6 +38,7 @@ h1 {
     padding: 8px;
     max-width: fit-content;
     display: block;
+    color: purple;
 }
 
 body {
@@ -65,14 +68,12 @@ body {
     margin-right: 50px;
     border-radius: 50px 50px 0px 0px;
   }
-  .highlightCabin {
-    font-weight: normal; 
-    margin: -1px; 
-    background: red;
-  }
   label {
     color: azure;
   }
   #editor {
     display: none;
+  }
+  .maker {
+    margin: 15px;
   }
