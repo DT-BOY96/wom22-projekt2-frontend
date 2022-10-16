@@ -76,7 +76,10 @@ ipcMain.handle('get-cabins', async () => {
     return cabins
 
   } catch (error) {
-    console.log(error.type)
+    if(error.type ="request-timeout") {
+      return {'msg': error.type}
+    }
+    console.log(error.message)
     return false
   }
 
@@ -205,49 +208,6 @@ ipcMain.handle('delete-order', async (event, data) => {
     return false
   }
 })
-
-ipcMain.handle('saved-note', async (event, data) => {
-  console.log('saved-note (main)')
-  try {
-    const resp = await fetch(API_URL + '/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + store.get('jwt')
-      },
-      body: JSON.stringify({ text: data.text }),
-      timeout: 3000
-    })
-    const user = await resp.json()
-    console.log(user)
-
-    if (resp.status > 201) return false
-  } catch (error) {
-    console.log(error.message)
-    return { 'msg': "Note save failed." }
-  }
-
-
-})
-ipcMain.handle('del-note', async (event, data) => {
-  console.log("ID:" + event.target)
-  if (event.classList.contains('btn-del')) {
-    //console.log(event.target.getAttribute)
-
-  }
-})
-
-/*
-// Example functions for communication between main and renderer (backend/frontend)
-// Node skickar kommentar till browsern (renderer.js):
-ipcMain.handle('get-stuff-from-main', () => 'Stuff from main!')
-// Browsern skickar kommentar till node (main.js)
-ipcMain.handle('send-stuff-to-main', async (event, data) => console.log(data))
-// click handler
-ipcMain.handle('btn-click', async () => {
-  console.log('button click received in main!')
-})
-*/
 
 app.on('window-all-closed', () => {
   app.quit()

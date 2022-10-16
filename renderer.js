@@ -1,9 +1,27 @@
+document.querySelector('#btn-login').addEventListener('click', async () => {
+    document.querySelector('#msg').innerText = ''
+    const login_failed = await window.electron.login({
+        email: document.querySelector('#email').value,
+        password: document.querySelector('#password').value
+    })
+    if (login_failed) {
+        document.querySelector('#msg').innerText = login_failed.msg
+        return
+    }
+    document.querySelector('#login').style.display = 'none'
+    document.querySelector('#bigBox').style.display = 'inline'
+    getCabins()
+    getServices()
+    getOrders()
+})
+
 getCabins = async () => {
     console.log('getCabins')
     const cabins = await window.electron.getCabins()
     if (!cabins) {
         document.querySelector('#login').style.display = 'block'
         document.querySelector('#bigBox').style.display = 'none'
+        document.querySelector('#msg').innerText = cabins.msg
 
         return
     } else if (cabins) {
@@ -79,8 +97,6 @@ document.querySelector('#openeditor').addEventListener('click', async () => {
     console.log("editing")
     document.getElementById('editor').style.display = 'inline'
     document.getElementById('edit&order').style.display = 'none'
-
-
 })
 
 document.querySelector('#cancel').addEventListener('click', async () => {
@@ -106,24 +122,6 @@ document.querySelector('#deletebutton').addEventListener('click', async () => {
     const deleteOrder = await window.electron.deleteOrder({
         id: id
     })
-    getOrders()
-})
-
-document.querySelector('#btn-login').addEventListener('click', async () => {
-    document.querySelector('#msg').innerText = ''
-    const login_failed = await window.electron.login({
-        email: document.querySelector('#email').value,
-        password: document.querySelector('#password').value
-    })
-    if (login_failed) {
-        document.querySelector('#msg').innerText = login_failed.msg
-        return
-    }
-
-    document.querySelector('#login').style.display = 'none'
-    document.querySelector('#bigBox').style.display = 'inline'
-    getCabins()
-    getServices()
     getOrders()
 })
 
