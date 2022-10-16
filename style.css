@@ -3,16 +3,76 @@
     display: none;
 }
 
+.left-h3 {
+    margin: 35px;
+}
+h1 {
+    text-align: center;
+}
 .cabin {
-    margin: 5px;
+    margin: 15px;
     border: 1px solid gray;
     border-radius: 5px;
-    background-color: rgb(86, 238, 83);
+    background-color:white;
     padding: 8px;
-    max-width: 150px;
+    max-width: 300px;
+    display: block;
+}
+
+.service {
+    margin: 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color:white;
+    padding: 8px;
+    max-width: 300px;
+    display: block;
+}
+.orders {
+    margin: 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color:white;
+    padding: 8px;
+    max-width: fit-content;
     display: block;
 }
 
 body {
-    background-color: magenta;
+    background-color: darkgrey;
+    height: 80%;
+    width: 1000px;
 }
+
+#bigBox {
+    width:80%;
+    height: 70%;
+    display: none;
+  }
+  #leftBox {
+    float:left;
+    height: fit-content;
+    width: fit-content;
+    background: gray;
+    margin-left:50px;
+    border-radius: 50px 50px 0px 0px;
+  }
+  #rightBox {
+    float:right;
+    height: fit-content;
+    width: fit-content;
+    background: gray;
+    margin-right: 50px;
+    border-radius: 50px 50px 0px 0px;
+  }
+  .highlightCabin {
+    font-weight: normal; 
+    margin: -1px; 
+    background: red;
+  }
+  label {
+    color: azure;
+  }
+  #editor {
+    display: none;
+  }

@@ -10,11 +10,15 @@ contextBridge.exposeInMainWorld('electron', {
 
   login: (data) => ipcRenderer.invoke('login', data),
 
-  saveNote: (data) => ipcRenderer.invoke('save-note', data),
+  getServices: (data) => ipcRenderer.invoke('get-services', data),
 
-  delNote: (data) => ipcRenderer.invoke('del-note', data),
+  getOrders: (data) => ipcRenderer.invoke('get-orders', data),
 
-  getServices: (data) => ipcRenderer.invoke('get-services', data)
+  makeOrder: (data) => ipcRenderer.invoke('make-order', data),
+
+  editOrder: (data) => ipcRenderer.invoke('edit-order', data),
+
+  deleteOrder: (data) => ipcRenderer.invoke('delete-order', data)
 
   /*
     btnClick: () => {

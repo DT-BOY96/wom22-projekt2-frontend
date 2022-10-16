@@ -77,11 +77,10 @@ ipcMain.handle('get-cabins', async () => {
     if (resp.status > 201) {
       return false
     }
-    console.log("TEST" + cabins)
     return cabins
 
   } catch (error) {
-    console.log(error.message)
+    //console.log(error.message)
     return false
   }
 
@@ -99,7 +98,6 @@ ipcMain.handle('get-services', async () => {
     if (resp.status > 201) {
       return false
     }
-    console.log(services)
     return services
 
   } catch (error) {
@@ -108,7 +106,109 @@ ipcMain.handle('get-services', async () => {
   }
 })
 
+ipcMain.handle('get-orders', async () => {
+  console.log('get-orders (main)')
+  try {
+    const resp = await fetch(API_URL2 + '/orders', {
+      method: 'GET',
+      timeout: 4000
+    })
+    const orders = await resp.json()
 
+    if (resp.status > 201) {
+      return false
+    }
+    return orders
+
+  } catch (error) {
+    console.log(error.message)
+    return false
+  }
+})
+
+ipcMain.handle('make-order', async (event, data) => {
+  console.log('make-order (main)')
+  try {
+    const resp = await fetch(API_URL2 + '/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        cabin: data.cabin,
+        servicetype: data.servicetype,
+        date: data.date
+      }),
+      timeout: 4000
+
+    })
+    const order = await resp.json()
+
+    if (resp.status > 201) {
+      return false
+    }
+    return order
+
+  } catch (error) {
+    console.log(error.message)
+    return false
+  }
+})
+
+ipcMain.handle('edit-order', async (event, data) => {
+  console.log('edit-order (main)')
+  try {
+    const resp = await fetch(API_URL2 + '/orders', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: data.id, 
+        cabin: data.cabin,
+        servicetype: data.servicetype,
+        date: data.date
+      }),
+      timeout: 4000
+    })
+    const patchorder = await resp.json()
+
+    if (resp.status > 201) {
+      return false
+    }
+    return patchorder
+
+  } catch (error) {
+    console.log(error.message)
+    return false
+  }
+})
+
+ipcMain.handle('delete-order', async (event, data) => {
+  console.log('get-services (main)')
+  try {
+    const resp = await fetch(API_URL2 + '/orders', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: data.id
+      }),
+      timeout: 4000
+    })
+    const services = await resp.json()
+
+    if (resp.status > 201) {
+      return false
+    }
+    return services
+
+  } catch (error) {
+    console.log(error.message)
+    return false
+  }
+})
 
 ipcMain.handle('saved-note', async (event, data) => {
   console.log('saved-note (main)')

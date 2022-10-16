@@ -1,32 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
-    <link rel="stylesheet" href="style.css">
-    <title>Cabin-service booker</title>
-  </head>
-  <body>
-    <h1>Cabin-service</h1>
 
-    <div id="login">
-        <input id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <input id="btn-login" type="button" value="login">
-        <div id="msg" style="color:red;"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+  <link rel="stylesheet" href="style.css">
+  <title>Cabin-service booker</title>
+</head>
+
+<body>
+  <h1>Cabin-service</h1>
+
+  <div id="login">
+    <h3 class="left-h3">Login</h3>
+    <input id="email" placeholder="Email"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <input id="btn-login" type="button" value="login">
+    <div id="msg" style="color:red;"></div>
+  </div>
+
+  <div id="bigBox">
+
+    <div id="leftBox">
+      <h3 class="left-h3">Your Cabins</h3>
+      <label for="cabins">Cabins</label><br>
+      <select id="cabins">No cabins</select>
+
+      <br>
+      <h3 class="left-h3">Available Services</h3>
+      <label for="services">Services</label><br>
+      <select id="services">No services</select>
+      <br>
+
+      <label for="calender">Service date</label><br>
+      <input type="date" id="calender" min="2022-10-17" value="2022-11-11">
+      <br>
+      <br>
+      <button id="orderbutton">Make Order</button>
+
     </div>
 
-    <div id="edit">
-      <input type="hidden" id="0">
-      <textarea id="noteText" placeholder="Write note here...."></textarea>
-      <input id="btn-save" type="button" value="Save">
+    <div id="rightBox">
+      <div id="orders2"></div>
+      <br>
+      <select id="orders">No orders</select>
+      <br>
+      <div id="edit&order">
+        <button id="openeditor">EDIT</button>
+        <button id="deletebutton">DELETE</button>
+      </div>
+      <br>
+      <div id="editor">
+        <form>
+          <label for="cabin-edit">Cabin</label><br>
+          <input type="text" id="cabin-edit" placeholder="Cabin address" required>
+          <br>
+          <label for="service-edit">Services</label><br>
+          <select id="service-edit" required></select>
+            <br>
+            <label for="date-edit">Date</label><br>
+            <input type="date" id="date-edit" value="2022-11-11" required><br>
+            <input id="cancel" type="button" value="Cancel" >
+            <input id="makeedit" type="submit" value="Make edit">
+
+        </form>
+
+      </div>
+
     </div>
-    <div id="cabins">No cabins</div>
-    <div id="services">No services</div>
 
-    
+  </div>
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
-  </body>
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+</body>
+
 </html>
