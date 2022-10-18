@@ -21,7 +21,12 @@ getCabins = async () => {
     if (!cabins || cabins.length < 1 ) {
         document.querySelector('#login').style.display = 'block'
         document.querySelector('#bigBox').style.display = 'none'
-        document.querySelector('#msg').innerText ='No cabins found'
+        if(cabins.length < 1 ) {
+            document.querySelector('#msg').innerText ='No cabins found'
+        }else {
+            document.querySelector('#msg').innerText =`Can't get cabins`
+        }
+        
 
         return
     } else if (cabins) {
